@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: crm-autopilot
+    env: docker
+    repo: https://github.com/rgoagone552-spec/Crm_Autopilot.git
+    branch: main
+    dockerfilePath: Dockerfile
+    healthCheckPath: /health
+        value: postgresql://postgres:[YOUR-PASSWORD]@db.kewdidejrxiuqphswjm.supabase.co:5432/postgres

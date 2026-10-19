@@ -1,0 +1,16 @@
+fastapi
+uvicorn[standard]
+langgraph
+langchain-core
+sqlalchemy
+psycopg2-binary
+pydantic
+pydantic-settings
+python-dotenv
+supabase
+pytest
+scikit-learn
+pandas
+numpy
+joblib
+apscheduler

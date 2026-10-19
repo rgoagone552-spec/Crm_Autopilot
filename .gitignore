@@ -1,0 +1,26 @@
+# Environments & Dependencies
+venv/
+env/
+.venv/
+
+# Byte-compiled / cache files
+__pycache__/
+*.py[cod]
+*$py.class
+*.pytest_cache/
+.pytest_cache/
+
+# Databases & local files
+*.db
+*.sqlite
+*.sqlite3
+test.db
+
+# IDE and metadata
+.vscode/
+.idea/
+*.metadata.json
+
+# Environment variables
+.env
+.env.local

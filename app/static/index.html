@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CRM Autopilot | Autonomous AI Sales Operations</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="app-header">
+    <div class="logo-area">
+      <div class="logo-icon">⚡</div>
+      <div class="logo-text">
+        <span class="brand-title">CRM Autopilot</span>
+        <span class="brand-subtitle">Autonomous AI Sales Operations & ML Risk Engine</span>
+      </div>
+    </div>
+    <div class="header-actions">
+      <div class="status-badge" id="backendStatus">
+        <span class="status-dot"></span>
+        <span id="statusText">Connecting...</span>
+      </div>
+      <button class="btn btn-secondary btn-sm" id="seedBtn">
+        🌱 Reset & Seed CRM Data
+      </button>
+      <div class="user-pill" id="userPill">
+        <span>👤</span>
+        <span id="userName">Sales Manager</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="main-container">
+    <!-- Top System Architecture Bar: All 5 Capabilities -->
+    <div class="feature-strip">
+      <div class="feature-badge">
+        <span class="feature-icon">🧠</span>
+        <span class="feature-title">1. scikit-learn ML Risk</span>
+      </div>
+      <div class="feature-badge">
+        <span class="feature-icon">🔄</span>
+        <span class="feature-title">2. LangGraph State Machine</span>
+      </div>
+      <div class="feature-badge">
+        <span class="feature-icon">🛡️</span>
+        <span class="feature-title">3. Self-Healing Failover</span>
+      </div>
+      <div class="feature-badge">
+        <span class="feature-icon">🛰️</span>
+        <span class="feature-title">4. 24/7 Autonomous Monitor</span>
+      </div>
+      <div class="feature-badge">
+        <span class="feature-icon">🔌</span>
+        <span class="feature-title">5. Salesforce & HubSpot Sync</span>
+      </div>
+    </div>
+
+    <!-- Feature 3 & 5: Autonomous Monitor & CRM Connectors Quick Deck -->
+    <section class="grid-2col">
+      <!-- Autonomous Monitor Widget -->
+      <div class="card monitor-card">
+        <div class="card-header">
+          <div class="card-title">
+            <span class="icon">🛰️</span>
+            <span>Autonomous Pipeline Monitor</span>
+          </div>
+          <button class="btn btn-primary btn-xs" id="scanNowBtn">⚡ Scan Pipeline Now</button>
+        </div>
+        <div class="monitor-body">
+          <div class="monitor-metrics">
+            <div class="metric-item">
+              <span class="metric-lbl">Total Monitored Pipeline</span>
+              <span class="metric-val" id="monTotalValue">₹1.80 Cr</span>
+            </div>
+            <div class="metric-item">
+              <span class="metric-lbl">Value at Slippage Risk</span>
+              <span class="metric-val text-danger" id="monValueRisk">₹47.0 Lakh</span>
+            </div>
+            <div class="metric-item">
+              <span class="metric-lbl">Critical Deals</span>
+              <span class="metric-val text-warning" id="monCriticalCount">2 Deals</span>
+            </div>
+          </div>
+          <div class="briefing-box">
+            <div class="briefing-title">Executive AI Briefing (Autonomous Daily Scan):</div>
+            <p id="monBriefingText">Evaluating pipeline telemetry across all active accounts...</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- CRM Connectors Widget -->
+      <div class="card connectors-card">
+        <div class="card-header">
+          <div class="card-title">
+            <span class="icon">🔌</span>
+            <span>Enterprise CRM Connectors</span>
+          </div>
+          <button class="btn btn-secondary btn-xs" id="syncConnectorsBtn">🔄 Sync Deals</button>
+        </div>
+        <div class="connectors-body">
+          <div class="connector-row">
+            <div class="connector-info">
+              <span class="connector-icon sf">☁️</span>
+              <div>
+                <strong>Salesforce CRM</strong>
+                <span class="connector-sub" id="sfStatus">REST SOQL v59.0 • Connected</span>
+              </div>
+            </div>
+            <button class="btn btn-outline btn-xs" id="testSfBtn">Test Ping</button>
+          </div>
+          <div class="connector-row">
+            <div class="connector-info">
+              <span class="connector-icon hs">🧡</span>
+              <div>
+                <strong>HubSpot CRM</strong>
+                <span class="connector-sub" id="hsStatus">v3 Objects API • Connected</span>
+              </div>
+            </div>
+            <button class="btn btn-outline btn-xs" id="testHsBtn">Test Ping</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Prompt Console -->
+    <section class="card prompt-card">
+      <div class="card-header">
+        <div class="card-title">
+          <span class="icon">💬</span>
+          <span>Sales Operations Agent Console</span>
+        </div>
+        <div class="preset-label">Quick Scenarios:</div>
+      </div>
+
+      <!-- Quick Preset Chips -->
+      <div class="preset-chips">
+        <button class="chip" data-prompt="Find all opportunities worth more than ₹10 lakh that haven't had any activity in the last seven days and create a follow-up task due tomorrow.">
+          ⭐ Standard: Inactive > ₹10 Lakh in 7 Days
+        </button>
+        <button class="chip" data-prompt="follow up on stale deals">
+          🤔 Ambiguity Test: "follow up on stale deals" (Triggers Disambiguation)
+        </button>
+        <button class="chip" data-prompt="Find open opportunities over ₹25 lakh with no activity in 14 days and create follow-up tasks due tomorrow.">
+          🔥 Enterprise High Exposure (> ₹25 Lakh)
+        </button>
+      </div>
+
+      <!-- Prompt Input -->
+      <div class="prompt-box">
+        <textarea id="promptInput" rows="3" placeholder="e.g. Find all opportunities worth more than ₹10 lakh that haven't had any activity in the last 7 days and create a follow-up task due tomorrow..."></textarea>
+        <div class="prompt-footer">
+          <div class="prompt-options">
+            <span class="hint">⚡ Engine: LangGraph State Machine + Gemini Flash + scikit-learn</span>
+            <label class="glitch-toggle">
+              <input type="checkbox" id="glitchCheck">
+              <span>Simulate Downstream Glitch (Test Self-Healing)</span>
+            </label>
+          </div>
+          <button class="btn btn-primary" id="previewBtn">
+            <span>Execute Agent Workflow</span>
+            <span class="arrow">→</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="toast hidden"></div>
+
+    <!-- Feature 4: Disambiguation Card (Hidden by default) -->
+    <section id="disambiguationSection" class="card disambiguation-card hidden">
+      <div class="card-header">
+        <div class="card-title">
+          <span class="icon">❓</span>
+          <span>Multi-Turn Disambiguation Required</span>
+        </div>
+        <span class="badge badge-warning">Awaiting Clarification</span>
+      </div>
+      <div class="disambiguation-body">
+        <p class="disambiguation-question" id="disambiguationQuestion"></p>
+        <div class="disambiguation-options" id="disambiguationOptions">
+          <!-- Dynamically generated preset option buttons -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Dry-Run Preview Section (Hidden by default) -->
+    <section id="previewSection" class="card preview-card hidden">
+      <div class="card-header">
+        <div class="card-title">
+          <span class="icon">🔍</span>
+          <span>LangGraph Dry-Run Execution Plan</span>
+        </div>
+        <span class="badge badge-warning" id="previewStatusBadge">Pending Human Approval</span>
+      </div>
+
+      <!-- Extracted Intent Tags -->
+      <div class="intent-grid" id="intentGrid">
+        <div class="intent-item">
+          <span class="intent-label">Min Deal Size</span>
+          <span class="intent-val" id="intentAmount">-</span>
+        </div>
+        <div class="intent-item">
+          <span class="intent-label">Inactivity Threshold</span>
+          <span class="intent-val" id="intentDays">-</span>
+        </div>
+        <div class="intent-item">
+          <span class="intent-label">Target Status</span>
+          <span class="intent-val" id="intentStatus">-</span>
+        </div>
+        <div class="intent-item">
+          <span class="intent-label">Execution Strategy</span>
+          <span class="intent-val" id="intentAction">LangGraph StateFlow</span>
+        </div>
+      </div>
+
+      <!-- Matched Records Table with ML Risk Columns -->
+      <div class="table-container">
+        <div class="table-title">
+          <span>Candidate Opportunities & scikit-learn Slippage Risk</span>
+          <span class="count-pill" id="matchedCount">0 records</span>
+        </div>
+        <table class="data-table" id="matchedTable">
+          <thead>
+            <tr>
+              <th>Opp ID</th>
+              <th>Account</th>
+              <th>Amount</th>
+              <th>Inactivity</th>
+              <th>ML Risk Score</th>
+              <th>Risk Tier</th>
+              <th>Explainability Factors</th>
+            </tr>
+          </thead>
+          <tbody id="matchedTbody">
+            <!-- Dynamic rows -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Proposed Actions Summary -->
+      <div class="proposed-actions-box">
+        <div class="actions-header">Planned Autonomous Actions (Safe Sandbox Preview)</div>
+        <ul id="actionsList" class="actions-list">
+          <!-- Dynamic proposed actions -->
+        </ul>
+      </div>
+
+      <!-- Approval Decision Bar -->
+      <div class="approval-bar">
+        <div class="approval-info">
+          <strong>Human-in-the-Loop Safe Gate:</strong> No database records or remote CRM entities will be modified without explicit confirmation.
+        </div>
+        <div class="approval-buttons">
+          <button class="btn btn-danger" id="rejectBtn">❌ Reject Plan</button>
+          <button class="btn btn-success" id="approveBtn">✅ Approve & Execute Plan</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Execution Report Section (Hidden by default) -->
+    <section id="reportSection" class="card report-card hidden">
+      <div class="card-header">
+        <div class="card-title">
+          <span class="icon">📊</span>
+          <span>Execution, Audit & Self-Healing Telemetry</span>
+        </div>
+        <span class="badge badge-success" id="reportStatusBadge">Completed</span>
+      </div>
+
+      <!-- Stats Grid -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <span class="stat-num text-primary" id="statCreated">0</span>
+          <span class="stat-label">Tasks Created</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num text-warning" id="statSkipped">0</span>
+          <span class="stat-label">Skipped (Duplicate Prevention)</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num text-purple" id="statHealed">0</span>
+          <span class="stat-label">Self-Healed Glitches</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num text-success" id="statVerified">100%</span>
+          <span class="stat-label">DB State Verified</span>
+        </div>
+      </div>
+
+      <!-- Self-Healing Recovery Log -->
+      <div id="recoveryLogBox" class="recovery-box hidden">
+        <div class="recovery-header">🛡️ Self-Healing Resiliency Log:</div>
+        <ul id="recoveryList" class="recovery-list"></ul>
+      </div>
+
+      <!-- Created Tasks Log -->
+      <div class="table-container">
+        <div class="table-title">Persisted Follow-up Tasks</div>
+        <table class="data-table" id="tasksTable">
+          <thead>
+            <tr>
+              <th>Task ID</th>
+              <th>Opportunity ID</th>
+              <th>Assigned Owner</th>
+              <th>Due Date</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody id="tasksTbody">
+            <!-- Dynamic rows -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

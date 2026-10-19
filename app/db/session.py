@@ -1,22 +1,32 @@
 import os
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker, scoped_session
+from sqlalchemy.orm import scoped_session, sessionmaker
+from sqlalchemy.pool import StaticPool
 from .models import Base
 
-# Load database URL from environment or default to local PostgreSQL
-DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://postgres:postgres@localhost:5432/crm_autopilot")
+# Database URL – defaults to a file‑based SQLite DB for development.
+DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./test.db")
 
-engine = create_engine(DATABASE_URL, echo=False, future=True)
-# Create all tables if they don't exist
-Base.metadata.create_all(bind=engine)
+# When using an in‑memory SQLite DB (e.g., in tests) we need a StaticPool so the same connection is reused.
+if DATABASE_URL.startswith("sqlite:///:memory:"):
+    engine = create_engine(
+        DATABASE_URL,
+        connect_args={"check_same_thread": False},
+        poolclass=StaticPool,
+        echo=False,
+        future=True,
+    )
+else:
+    engine = create_engine(DATABASE_URL, echo=False, future=True)
 
-# Scoped session for thread‑safe usage
+# Scoped session factory used by FastAPI dependencies.
 SessionLocal = scoped_session(sessionmaker(autocommit=False, autoflush=False, bind=engine))
 
 def get_db():
-    """Dependency for FastAPI endpoints – yields a DB session and ensures it closes."""
+    """FastAPI dependency that provides a DB session."""
     db = SessionLocal()
     try:
+        Base.metadata.create_all(bind=db.get_bind())
         yield db
     finally:
         db.close()

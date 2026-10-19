@@ -10,11 +10,13 @@ class Account(Base):
     owner_id = Column(Integer, nullable=False)
     contacts = relationship("Contact", back_populates="account", cascade="all, delete-orphan")
     opportunities = relationship("Opportunity", back_populates="account", cascade="all, delete-orphan")
+    deals = relationship("Deal", back_populates="account", cascade="all, delete-orphan")
 
 class Contact(Base):
     __tablename__ = "contacts"
-    id = Column(Integer, primary_key=True, index=True)
-    account_id = Column(Integer, ForeignKey("accounts.id"), nullable=False)
+    id = Column(String, primary_key=True, index=True)
+    name = Column(String, nullable=False)
+    account_id = Column(Integer, ForeignKey("accounts.id"), nullable=True)
     email = Column(String)
     phone = Column(String)
     account = relationship("Account", back_populates="contacts")
@@ -29,6 +31,15 @@ class Opportunity(Base):
     account = relationship("Account", back_populates="opportunities")
     activities = relationship("Activity", back_populates="opportunity", cascade="all, delete-orphan")
     tasks = relationship("Task", back_populates="opportunity", cascade="all, delete-orphan")
+
+class Deal(Base):
+    __tablename__ = "deals"
+    id = Column(String, primary_key=True, index=True)
+    name = Column(String, nullable=False)
+    amount = Column(Float, nullable=True)
+    stage = Column(String, nullable=True)
+    account_id = Column(Integer, ForeignKey("accounts.id"), nullable=True)
+    account = relationship("Account", back_populates="deals")
 
 class Activity(Base):
     __tablename__ = "activities"
